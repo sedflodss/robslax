@@ -3,36 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>شحن روبلوكس </title>
+  <title>شحن روبلوكس</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
     body {
       margin: 0;
       padding: 0;
       font-family: 'Cairo', sans-serif;
-      background: url('https://images.unsplash.com/photo-1549921296-3a6bdf1f4aaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
-      background-size: cover;
+      background: radial-gradient(ellipse at bottom, #0b0c2a, #000000);
       color: #fff;
       text-align: center;
       padding: 30px 20px;
+      overflow: hidden;
+      position: relative;
     }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      box-shadow:
+        10px 10px white,
+        20px 30px white,
+        50px 80px white,
+        100px 150px white,
+        150px 200px white,
+        200px 250px white,
+        250px 300px white,
+        300px 350px white,
+        400px 100px white,
+        500px 200px white,
+        600px 300px white,
+        700px 400px white,
+        800px 500px white,
+        900px 600px white;
+      animation: twinkle 10s infinite linear;
+      z-index: 0;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 0.3; }
+    }
+
     .container {
-      background: rgba(0, 0, 0, 0.8);
+      position: relative;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.85);
       border-radius: 25px;
       max-width: 600px;
       margin: auto;
       padding: 40px 25px;
       box-shadow: 0 0 20px gold;
     }
+
     h1 {
       font-size: 2.4em;
       margin-bottom: 20px;
       color: gold;
     }
+
     p {
       font-size: 1.1em;
       margin-bottom: 25px;
     }
+
     input {
       width: 80%;
       padding: 15px;
@@ -42,6 +79,7 @@
       margin-bottom: 20px;
       text-align: center;
     }
+
     .btn {
       display: inline-block;
       background: linear-gradient(45deg, #FFD700, #FFC107);
@@ -56,6 +94,7 @@
       box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700 inset;
       transition: 0.3s;
     }
+
     .btn:hover {
       transform: scale(1.05);
       box-shadow: 0 0 25px #fff, 0 0 35px gold inset;
@@ -63,6 +102,8 @@
   </style>
 </head>
 <body>
+  <div class="stars"></div>
+
   <div class="container">
     <h1>🪐 شحن روبلوكس </h1>
     <p>اكتب اسمك في روبلوكس عشان نبدأ الشحن لك ✅</p>
@@ -85,17 +126,6 @@
         return;
       }
 
-      // إرسال الاسم والكمية إلى Google Sheets
-      fetch("https://script.google.com/macros/s/AKfycbwFSF2866QV_oeiY8pW6gBK_2FoB_hwC_1Kif89RzGFIcPnlZSQALLCDkqLZSKfc8fI/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `user=${encodeURIComponent(username)}&amount=${amount}`
-      });
-
-      // الانتقال لصفحة التحقق
       const url = `verify.html?user=${encodeURIComponent(username)}&amount=${amount}`;
       window.location.href = url;
     }
